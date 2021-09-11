@@ -1,0 +1,14 @@
+{
+    "name": "qrgenerator",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "express": "4.17.1"
+    },
+    "repository": {},
+    "engines": {
+        "node": "^14.17.1"
+    }
+}
