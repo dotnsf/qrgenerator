@@ -158,15 +158,15 @@ function generateCustomQRCode(){
   <tr><td>
   QRコードに含める情報
   </td><td>
-  <input type="text" class="form-control" id="text" placeholder="text, url, ..." value=""/>
+  <input type="text" class="form-control" id="text" placeholder="text, url, ..." value="https://dotnsf.github.io/qrgenerator/"/>
   </td></tr>
   <tr><td>
   誤り訂正レベル
   </td><td>
   <select class="form-control" id="qr_error_correction_level">
-    <option value="H" selected>H(30%)</option>
+    <option value="H">H(30%)</option>
     <option value="Q">Q(25%)</option>
-    <option value="M">M(15%)</option>
+    <option value="M" selected>M(15%)</option>
     <option value="L">L(7%)</option>
   </select>
   </td></tr>
