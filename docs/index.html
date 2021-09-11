@@ -140,6 +140,22 @@ function generateCustomQRCode(){
     });
   }
 }
+
+function resetFrontImage(){
+  $('#image_preview').attr( 'src', '' );
+}
+
+function downloadImage(){
+  var canvas = document.getElementById( 'qrcode' );
+  if( !canvas || !canvas.getContext ){
+    return false;
+  }
+
+  var link = document.createElement( 'a' );
+  link.href = canvas.toDataURL( "image/png" );
+  link.download = ( new Date() ).getTime() + '.png';
+  link.click();
+}
 </script>
 </head>
 <body>
@@ -149,7 +165,9 @@ function generateCustomQRCode(){
 </nav>
 
 <div class="container" style="position:relative; padding-top:50px;">
+  <a href="#" onClick="downloadImage();">
   <canvas id="qrcode"></canvas>
+  </a>
 </div>
 
 <div class="container" style="position:relative; padding-top:50px;">
@@ -192,6 +210,7 @@ function generateCustomQRCode(){
   <img src="" id="image_preview" width="100"/>
   </td><td>
   <input type="file" class="form-control" id="qr_front_image" value=""/>
+  <input type="button" class="btn btn-warning" value="Reset" onClick="resetFrontImage();"/>
   </td></tr>
   </table>
   </td></tr>
