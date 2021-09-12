@@ -22,6 +22,13 @@ body{
 .mycanvas{
   border: 1px solid #333;
 }
+#qrcode:active{
+  border: 1px solid #334c66;
+  background-color: #69c;
+  -webkit-box-shadow:inset 0px 0px 8px #334c66;
+  -moz-box-shadow: inset 0px 0px 2px #3a6da0;
+  box-shadow: 0px 0px 2px #3a6da0;
+}
 </style>
 
 <script>
@@ -80,6 +87,10 @@ $(function(){
     var qr_width = parseInt( $('#qr_width').val() );
     $('#qr_width_label').html( qr_width );
   });
+
+  $('#qrcode').on( 'click', function( e ){
+    copyToClipboard();
+  })
 });
 
 function generateCustomQRCode(){
@@ -145,6 +156,32 @@ function resetFrontImage(){
   $('#image_preview').attr( 'src', '' );
 }
 
+function copyToClipboard(){
+  var text = $('#text').val();
+  if( text ){
+    //. http://dotnsf.blog.jp/archives/1078232832.html
+    var tmp = document.createElement( 'div' );
+    var pre = document.createElement( 'pre' );
+
+    pre.style.webkitUserSelect = 'auto';
+    pre.style.userSelect = 'auto';
+    tmp.appendChild( pre ).textContent = text;
+
+    var s = tmp.style;
+    s.position = 'fixed';
+    s.right = '200%';
+
+    document.body.appendChild( tmp );
+    document.getSelection().selectAllChildren( tmp );
+
+    var result = document.execCommand( 'copy' );
+    
+    document.body.removeChild( tmp );
+
+    return result;
+  }
+}
+
 function downloadImage(){
   var canvas = document.getElementById( 'qrcode' );
   if( !canvas || !canvas.getContext ){
@@ -165,9 +202,7 @@ function downloadImage(){
 </nav>
 
 <div class="container" style="position:relative; padding-top:50px;">
-  <a href="#" onClick="downloadImage();">
   <canvas id="qrcode"></canvas>
-  </a>
 </div>
 
 <div class="container" style="position:relative; padding-top:50px;">
@@ -216,6 +251,7 @@ function downloadImage(){
   </td></tr>
   <tr><td colspan="2">
   <button class="btn btn-primary" onClick="generateCustomQRCode();">生成</button>
+  <button class="btn btn-success" onClick="downloadImage();">画像ダウンロード</button>
   </td></tr>
 </table>
 
